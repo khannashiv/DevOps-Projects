@@ -31,5 +31,5 @@ env:
   - name: MSI_CLIENT_ID
     value: d1a309d1-04b8-4de0-a6c2-8420bee439b6
 image:
-  repository: mcr.microsoft.com/azure-application-gateway/kubernetes-ingress
-  tag: 1.11.1
+  repository: khannashiv/agic
+  tag: custom-msi
