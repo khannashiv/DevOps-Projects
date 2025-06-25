@@ -81,13 +81,26 @@
     ls -lh rendered.yaml
     ```
     - Renders the Helm chart for `robot-shop` into Kubernetes manifests and saves them to `rendered.yaml` for inspection.
+
 <!--
     ** Meaning of the above command **
         - Renders the Helm templates in the current directory (.).
         - Uses the release name robot-shop and namespace robot-shop.
         - Produces a complete Kubernetes manifest YAML (but does not apply it to the cluster).
         - Outputs all manifests into rendered.yaml (which you can inspect or apply manually with kubectl apply -f).
+        - In this example i.e. helm template robot-shop --namespace robot-shop .
+            - robot-shop after template → is the Helm release name, not the chart name.
+            - Example : Chart.yaml
+                name: awesome-service
+                version: 1.0.0
+            - We can run: helm template my-release-name --namespace staging ./awesome-service/
+                my-release-name = Helm release name (your label for the deployment)awesome-service = actual chart name from Chart.yaml
+            - We can use any release name — it doesn’t need to match the chart name.
+            - helm template robot-shop --namespace robot-shop .
+               -- robot-shop is the release name
+               -- Chart name is taken from Chart.yaml (in your case, likely also robot-shop, but it doesn’t have to be)             
 -->
+
 6. **Install the Helm Chart with Debugging**
     ```sh
     kubectl create ns robot-shop
