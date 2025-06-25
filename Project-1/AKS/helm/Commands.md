@@ -216,4 +216,6 @@ kubectl exec -it deployment/ingress-azure -- /app/ingress-azure --version
 ```sh
 # Delete the AKS cluster and associated resources
 az aks delete --resource-group AKS_RG --name AKS_Demo --yes --no-wait
+# Delete the Application Gateway
+az network application-gateway delete --resource-group MC_AKS_RG_AKS_Demo_centralindia --name my-app-gw
 ```
