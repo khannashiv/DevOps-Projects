@@ -219,3 +219,4 @@ az aks delete --resource-group AKS_RG --name AKS_Demo --yes --no-wait
 # Delete the Application Gateway
 az network application-gateway delete --resource-group MC_AKS_RG_AKS_Demo_centralindia --name my-app-gw
 ```
+### NOTE : In this demo, we have created Application gateway on azure using Bicep template.
