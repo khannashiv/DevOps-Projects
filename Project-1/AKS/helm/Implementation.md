@@ -35,6 +35,85 @@
 - [Robot Shop demo application](https://github.com/khannashiv/robot-shop)  
     Sample microservices-based application for demonstrating Kubernetes deployments and architectures.
 
+
+### Simple Implementation Steps of AKS with AGIC and Workload Identity
+
+- This section outlines the steps to create an Azure Kubernetes Service (AKS) cluster with Application Gateway Ingress Controller (AGIC) and Workload Identity, along with Helm chart operations for deploying a sample application.
+
+1. **Create an AKS Cluster with Application Gateway Ingress Controller (AGIC) and Workload Identity**
+    ```sh
+    az aks create \
+      -g AKS_RG -n myAKS \
+      --node-vm-size Standard_B2s \
+      --node-count 2 \
+      --network-plugin azure \
+      --enable-addons ingress-appgw \
+      --appgw-name myAppGw \
+      --appgw-subnet-cidr 10.225.0.0/16 \
+      --enable-oidc-issuer \
+      --enable-workload-identity
+    ```
+    - Provisions an AKS cluster named `myAKS` in resource group `AKS_RG` with 2 nodes, Azure CNI networking, and enables AGIC and Workload Identity.
+
+2. **Remove the AKS Preview Extension (if previously installed)**
+    ```sh
+    az extension remove --name aks-preview
+    ```
+    - Cleans up the Azure CLI by removing the deprecated or unneeded `aks-preview` extension.
+
+3. **Get AKS Cluster Credentials & verify kubernetes intallation**
+    ```sh
+    az aks get-credentials --resource-group AKS_RG --name myAKS
+    kubectl get nodes
+    kubectl config current-context
+    ```
+    - Downloads and merges the AKS cluster credentials into your local kubeconfig for `kubectl` access.
+
+4. **Verify Helm Installation**
+    ```sh
+    helm version
+    ```
+    - Checks that Helm is installed and displays the current version.
+
+5. **Render Helm Chart Templates Locally**
+    ```sh
+    helm template robot-shop --namespace robot-shop . > rendered.yaml
+    ls -lh rendered.yaml
+    ```
+    - Renders the Helm chart for `robot-shop` into Kubernetes manifests and saves them to `rendered.yaml` for inspection.
+
+6. **Install the Helm Chart with Debugging**
+    ```sh
+    kubectl create ns robot-shop
+    helm install robot-shop --namespace robot-shop . --debug
+    ```
+    - Installs the `robot-shop` chart into the `robot-shop` namespace with debug output for troubleshooting.
+
+7. **Dry Run Helm Installation**
+    ```sh
+    helm install robot-shop --namespace robot-shop . --dry-run --debug
+    ```
+    - Simulates the installation without making changes, useful for validating the chart and values.
+
+8. **Package the Helm Chart (optional)**
+    ```sh
+    helm package .
+    ```
+    - Packages the current chart directory into a `.tgz` archive for distribution or versioning.
+
+9. **Install the Packaged Helm Chart (optional)**
+    ```sh
+    helm install robot-shop --namespace robot-shop ./robot-shop-*.tgz --debug
+    ```
+    - Installs the packaged chart archive into the `robot-shop` namespace with debug output.
+
+10. **Install ingress resource & Verify Ingress Resources**
+     ```sh
+     kubectl apply -f ingress.yaml
+     kubectl get ing -n robot-shop
+     ```
+     - Lists the ingress resources in the `robot-shop` namespace to confirm successful deployment and ingress setup.
+
 ## Outcomes of hands-on
 - ![AKS-1.png](./Images/AKS-1.png)
 - ![AKS-2.png](./Images/AKS-2.png)
