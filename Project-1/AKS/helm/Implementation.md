@@ -17,17 +17,17 @@
 - [Sample Helm configuration for AGIC](https://raw.githubusercontent.com/Azure/application-gateway-kubernetes-ingress/master/docs/examples/sample-helm-config.yaml)  
     Example Helm configuration YAML file for deploying the Application Gateway Ingress Controller.
 
-- [Azure Bicep documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
-    Official documentation for Bicep, a domain-specific language for deploying Azure resources declaratively.
-
 - [Application Gateway Ingress Controller documentation](https://azure.github.io/application-gateway-kubernetes-ingress/)  
     Project documentation and guides for the Azure Application Gateway Ingress Controller.
 
-- [Azure Bicep GitHub repository](https://github.com/Azure/bicep)  
-    Source code and releases for the Azure Bicep project.
-
 - [Application Gateway Ingress Controller GitHub repository](https://github.com/Azure/application-gateway-kubernetes-ingress)  
     Source code and resources for the Azure Application Gateway Ingress Controller.
+
+- [Azure Bicep documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
+    Official documentation for Bicep, a domain-specific language for deploying Azure resources declaratively.
+
+- [Azure Bicep GitHub repository](https://github.com/Azure/bicep)  
+    Source code and releases for the Azure Bicep project.
 
 - [Three-tier architecture demo](https://github.com/iam-veeramalla/three-tier-architecture-demo)  
     Example project demonstrating a three-tier application architecture on Kubernetes.
