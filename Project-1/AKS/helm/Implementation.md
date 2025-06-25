@@ -89,7 +89,7 @@
     ```
     - Installs the `robot-shop` chart into the `robot-shop` namespace with debug output for troubleshooting.
 
-7. **Dry Run Helm Installation**
+7. **Dry Run Helm Installation (optional)**
     ```sh
     helm install robot-shop --namespace robot-shop . --dry-run --debug
     ```
