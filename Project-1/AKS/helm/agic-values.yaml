@@ -28,8 +28,33 @@ env:
     value: d1a309d1-04b8-4de0-a6c2-8420bee439b6
   - name: ARM_TENANT_ID
     value: cb8d7fd2-d41e-42b0-9735-50de70c6b061
-  - name: MSI_CLIENT_ID
-    value: d1a309d1-04b8-4de0-a6c2-8420bee439b6
+
 image:
   repository: khannashiv/agic
   tag: custom-msi
+  pullPolicy: Always
+
+kubernetes:
+  ingressClassResource:
+    enabled: true
+    name: azure-application-gateway
+    default: false
+    controllerValue: "azure/application-gateway"
+  resources:
+    requests:
+      memory: "256Mi"
+    limits:
+      memory: "512Mi"
+  livenessProbe:
+    enabled: false
+  readinessProbe:
+    enabled: false
+
+controller:
+  extraEnvs:
+    - name: ARM_AUTH_TYPE
+      value: msi
+    - name: ARM_CLIENT_ID
+      value: d1a309d1-04b8-4de0-a6c2-8420bee439b6
+  args:
+    - --auth-mode=msi
