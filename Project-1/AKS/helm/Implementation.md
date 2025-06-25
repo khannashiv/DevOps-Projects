@@ -81,7 +81,13 @@
     ls -lh rendered.yaml
     ```
     - Renders the Helm chart for `robot-shop` into Kubernetes manifests and saves them to `rendered.yaml` for inspection.
-
+<!--
+    ** Meaning of the above command **
+        - Renders the Helm templates in the current directory (.).
+        - Uses the release name robot-shop and namespace robot-shop.
+        - Produces a complete Kubernetes manifest YAML (but does not apply it to the cluster).
+        - Outputs all manifests into rendered.yaml (which you can inspect or apply manually with kubectl apply -f).
+-->
 6. **Install the Helm Chart with Debugging**
     ```sh
     kubectl create ns robot-shop
