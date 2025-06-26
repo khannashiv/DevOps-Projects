@@ -133,7 +133,7 @@
      ```
      - Lists the ingress resources in the `robot-shop` namespace to confirm successful deployment and ingress setup.
 
-## Outcomes of hands-on where application gateway is deployed after AKS was deployed using bicep to see functionality of AGIC
+## Outcomes of hands-on where application gateway is deployed after AKS was deployed using bicep to see functionality of AGIC.
 - ![AKS-1.png](./Images/AKS-1.png)
 - ![AKS-2.png](./Images/AKS-2.png)
 - ![AKS-3.png](./Images/AKS-3.png)
@@ -163,7 +163,7 @@
 - ![AKS-27.png](./Images/AKS-27.png)
 - ![AKS-28.png](./Images/AKS-28.png)
 
-## Deployed application gateway along with AKS using the command mentioned as pointer 1 to see the functionality of AGIC
+## Deployed application gateway along with AKS using the command mentioned as pointer 1 to see the functionality of AGIC.
 
 - ![AKS-29](./Images/AKS-29.png)
 - ![AKS-30](./Images/AKS-30.png)
