@@ -133,7 +133,7 @@
      ```
      - Lists the ingress resources in the `robot-shop` namespace to confirm successful deployment and ingress setup.
 
-## Outcomes of hands-on
+## Outcomes of hands-on where application gateway is deployed after AKS was deployed using bicep
 - ![AKS-1.png](./Images/AKS-1.png)
 - ![AKS-2.png](./Images/AKS-2.png)
 - ![AKS-3.png](./Images/AKS-3.png)
@@ -162,5 +162,22 @@
 - ![AKS-26.png](./Images/AKS-26.png)
 - ![AKS-27.png](./Images/AKS-27.png)
 - ![AKS-28.png](./Images/AKS-28.png)
+
+## Deployed application gateway along with AKS using the command mentioned as pointer 1.
+
+- ![AKS-29](./Images/AKS-29.png)
+- ![AKS-30](./Images/AKS-30.png)
+- ![AKS-31](./Images/AKS-31.png)
+- ![AKS-32](./Images/AKS-32.png)
+- ![AKS-33](./Images/AKS-33.png)
+- ![AKS-34](./Images/AKS-34.png)
+- ![AKS-35](./Images/AKS-35.png)
+- ![AKS-36](./Images/AKS-36.png)
+- ![AKS-37](./Images/AKS-37.png)
+- ![AKS-38](./Images/AKS-38.png)
+- ![AKS-39](./Images/AKS-39.png)
+- ![AKS-40](./Images/AKS-40.png)
+- ![AKS-41](./Images/AKS-41.png)
+- ![AKS-42](./Images/AKS-42.png)
 
 ---
