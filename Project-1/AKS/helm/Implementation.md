@@ -182,3 +182,11 @@
 - ![AKS-43](./Images/AKS-43.png)
 - ![AKS-44](./Images/AKS-44.png)
 ---
+
+### 11. Clean Up Resources
+
+```sh
+# Delete the AKS cluster and associated resources
+az aks delete --resource-group AKS_RG --name myAKS --yes --no-wait
+
+```
