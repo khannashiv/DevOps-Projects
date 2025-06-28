@@ -30,6 +30,8 @@ This project is designed to automate the deployment of a sample voting applicati
 
 ## Outcomes of end to end Azure CICD pipeline
 
+---
+
 - ![Azure-CICD-1.png](./Images/Azure-CICD-1.png)
 - ![Azure-CICD-2.png](./Images/Azure-CICD-2.png)
 - ![Azure-CICD-3.png](./Images/Azure-CICD-3.png)
@@ -85,3 +87,6 @@ This project is designed to automate the deployment of a sample voting applicati
 - ![Azure-CICD-53.png](./Images/Azure-CICD-53.png)
 - ![Azure-CICD-54.png](./Images/Azure-CICD-54.png)
 - ![Azure-CICD-55.png](./Images/Azure-CICD-55.png)
+- ![Azure-CICD-56.png](./Images/Azure-CICD-56.png)
+
+---
