@@ -1,34 +1,163 @@
-## End-2-End CI/CD Implementation Using Azure DevOps (for Voting Application)
+## End-to-End CI/CD Implementation Using Azure DevOps (Voting Application)
 
-This project demonstrates the implementation of a CI/CD pipeline leveraging Azure DevOps and various Azure resources, including Azure Virtual Machines (VM), Azure Container Registry (ACR), Azure Kubernetes Service (AKS), and other azure related services.
+This project showcases a comprehensive CI/CD pipeline leveraging Azure DevOps and key Azure resources such as Azure Virtual Machines (VMs), Azure Container Registry (ACR), Azure Kubernetes Service (AKS), and related services.
+
+---
 
 ## Project Overview
-This project is designed to automate the deployment of a sample voting application using Azure DevOps pipelines. The application consists of multiple services, each containerized and deployed to an AKS cluster. The CI/CD pipeline is configured to build, test, and deploy the application automatically upon code changes.
+
+Automate the deployment of a sample voting application using Azure DevOps pipelines. The application is composed of multiple containerized services, orchestrated and deployed to an AKS cluster. The CI/CD pipeline is designed to build, test, and deploy the application automatically upon code changes.
+
+---
 
 ## Prerequisites
-- An Azure DevOps account and organization.
-- A Git repository containing the source code of the voting application.
-- Azure CLI installed and configured.
-- Access to an Azure subscription with permissions to create resources.
-- Basic knowledge of Docker, Kubernetes, and Azure DevOps.
+
+- Azure DevOps account and organization
+- Git repository with the voting application source code
+- Azure CLI installed and configured
+- Access to an Azure subscription with resource creation permissions
+- Basic knowledge of Docker, Kubernetes, and Azure DevOps
+
+---
 
 ## Implementation Steps
 
-1. **Create Azure DevOps Project and Repository**
-   - Sign in to Azure DevOps and create a new project.
-   - Create a new Git repository within the project to host the voting application code.
+### 1. Create Azure DevOps Project and Repository
+
+- Sign in to Azure DevOps and create a new project.
+- Create a Git repository within the project to host the voting application code.
+
+---
+
+### 2. AKS Installation & Configuration
+
+You can deploy AKS either via CLI or the Azure Portal UI.
+
+**Method 1: CLI Deployment**
+
+```bash
+AKS_SUBNET_ID=$(az network vnet subnet show \
+   --resource-group Azure-CICD \
+   --vnet-name Azure-VNET-1 \
+   --name AKSSubnet \
+   --query id -o tsv)
+
+echo $AKS_SUBNET_ID
+
+az aks create \
+   -g Azure-CICD \
+   -n myAKS \
+   --node-vm-size Standard_B2ms \
+   --node-count 1 \ # Adjust node count as needed
+   --network-plugin azure \
+   --vnet-subnet-id "$AKS_SUBNET_ID" \
+   --enable-oidc-issuer \
+   --enable-workload-identity
+```
+
+**Method 2: Portal Deployment**
+
+- Deploy AKS via the Azure Portal with minimal configuration for proof-of-concept.
+
+Once AKS is installed and accessible from your local machine, proceed to the next step.
+
+---
+
+### 3. ArgoCD Setup and Configuration
+
+- Install ArgoCD and update the `argocd-server` service type to `LoadBalancer` for web UI access.
+- Retrieve the initial admin password from the `argocd-initial-admin-secret`.
+- **Note:** ArgoCD is deployed in the `argocd` namespace. Refer to [ArgoCD official documentation](https://argo-cd.readthedocs.io/en/stable/) for details.
+
+**Key Commands:**
+
+```bash
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml  # Install
+kubectl delete -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml # Uninstall
+```
+
+---
+
+### 4. Azure Repo Integration
+
+- Configure Azure Repo credentials in ArgoCD (for private repositories). Add a Personal Access Token (PAT) from Azure DevOps under `Settings > Connect Repo` in the ArgoCD UI.
+
+   ```
+   https://<PAT>@dev.azure.com/<Organization>/<Project>/_git/<RepoName>
+   ```
+
+- Clone the Azure Repo locally:
+
+   ```bash
+   git clone https://USERNAME:PAT@dev.azure.com/YourOrg/YourProject/_git/RepoName
+   ```
+
+   **Example Parameters:**
+
+   | Parameter         | Value                       |
+   |-------------------|----------------------------|
+   | User Name         | devopspractice668          |
+   | PAT/Access Token  | X_X_X                      |
+   | Organization      | devopspractice6680482      |
+   | Project           | Azure-CICD-voting-app      |
+   | Repo Name         | Azure-CICD-voting-app      |
+   | Email             | devopspractice668@gmail.com|
+
+- Convert shell scripts to LF format to avoid CRLF errors:
+
+   ```bash
+   dos2unix updatek8manifests.sh
+   git add .
+   git commit -m "Convert scripts to LF"
+   git push
+   ```
+
+---
+
+### 5. Azure Container Registry (ACR) Integration
+
+To prevent `ErrImagePull` or `ImagePullBackOff` errors, ensure AKS can pull images from the private ACR by creating Kubernetes secrets and updating your manifests.
+
+- Enable ACR admin user and do check credentials:
+
+   ```bash
+   az acr update -n <acr-name> --admin-enabled true
+   az acr credential show --name <acr-name>
+   ```
+
+- Create Kubernetes secret for ACR:
+
+   ```bash
+   kubectl create secret docker-registry regcred \
+      --docker-server=<acr-name>.azurecr.io \
+      --docker-username=<acr-username> \
+      --docker-password='<acr-password>' \
+      --docker-email=<your-email> \
+      --namespace=default
+   ```
+
+- Reference the secret in your Kubernetes deployment manifests under `imagePullSecrets`.
+
+---
 
 ## Reference Documentation
 
-- [Example Voting App on GitHub](https://github.com/dockersamples/example-voting-app): Sample multi-service application used for demonstrating containerization and orchestration concepts.
-- [Azure DevOps for Beginners: How to Set Up Your Account, Organization, and Repository](https://techcommunity.microsoft.com/blog/educatordeveloperblog/azure-devops-for-beginners-how-to-set-up-your-account-organization-and-repositor/3790002): Step-by-step guide for getting started with Azure DevOps, including account and repository setup.
-- [Azure Pipelines Linux Agent Documentation](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/linux-agent?view=azure-devops&tabs=IP-V4): Official Microsoft documentation on configuring and using Linux build agents in Azure Pipelines.
-- [Azure DevOps Labs: YAML Pipelines](https://azuredevopslabs.com/labs/azuredevops/yaml/): Hands-on labs for learning how to create and manage CI/CD pipelines using YAML in Azure DevOps.
-- [Building a Simple CI/CD Pipeline with Azure DevOps (Medium)](https://medium.com/@lamjed.gaidi070/building-a-simple-ci-cd-pipeline-with-azure-devops-218e5dac2d61): Tutorial on implementing a basic CI/CD pipeline using Azure DevOps, with practical examples.
-
-## Outcomes of end to end Azure CICD pipeline
+- [Example Voting App on GitHub](https://github.com/dockersamples/example-voting-app)
+- [Azure DevOps for Beginners](https://techcommunity.microsoft.com/blog/educatordeveloperblog/azure-devops-for-beginners-how-to-set-up-your-account-organization-and-repositor/3790002)
+- [Azure Pipelines Linux Agent Documentation](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/linux-agent?view=azure-devops&tabs=IP-V4)
+- [Azure DevOps Labs: YAML Pipelines](https://azuredevopslabs.com/labs/azuredevops/yaml/)
+- [Building a Simple CI/CD Pipeline with Azure DevOps (Medium)](https://medium.com/@lamjed.gaidi070/building-a-simple-ci-cd-pipeline-with-azure-devops-218e5dac2d61)
+- [ArgoCD Documentation](https://argo-cd.readthedocs.io/en/stable/)
+- [Kubernetes: Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)
 
 ---
+
+## Outcomes: End-to-End Azure CI/CD Pipeline
+
+---
+
+Below are sample screenshots illustrating the pipeline and deployment process:
 
 - ![Azure-CICD-1.png](./Images/Azure-CICD-1.png)
 - ![Azure-CICD-2.png](./Images/Azure-CICD-2.png)
