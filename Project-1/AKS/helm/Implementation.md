@@ -189,4 +189,10 @@
 # Delete the AKS cluster and associated resources
 az aks delete --resource-group AKS_RG --name myAKS --yes --no-wait
 
+# Delete the Application Gateway
+az network application-gateway delete --name myAppGw --resource-group AKS_RG
+
+# To delete all the resources residing inside resource group at once.
+az group delete --name AKS_RG --yes --no-wait
+
 ```
