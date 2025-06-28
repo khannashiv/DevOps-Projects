@@ -183,6 +183,7 @@ After running the above command, you can access the `result` service in your web
 - [Building a Simple CI/CD Pipeline with Azure DevOps (Medium)](https://medium.com/@lamjed.gaidi070/building-a-simple-ci-cd-pipeline-with-azure-devops-218e5dac2d61)
 - [ArgoCD Documentation](https://argo-cd.readthedocs.io/en/stable/)
 - [Kubernetes: Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)
+- [Refer this repository for Azure practice](https://github.com/iam-veeramalla/Azure-zero-to-hero)
 
 ---
 
