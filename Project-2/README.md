@@ -1,8 +1,6 @@
-## CI/CD Implementation Using Azure DevOps
+## End-2-End CI/CD Implementation Using Azure DevOps (for Voting Application)
 
 This project demonstrates the implementation of a CI/CD pipeline leveraging Azure DevOps and various Azure resources, including Azure Virtual Machines (VM), Azure Container Registry (ACR), Azure Kubernetes Service (AKS), and other azure related services.
-
-# Azure DevOps CI/CD Pipeline for Voting Application
 
 ## Project Overview
 This project is designed to automate the deployment of a sample voting application using Azure DevOps pipelines. The application consists of multiple services, each containerized and deployed to an AKS cluster. The CI/CD pipeline is configured to build, test, and deploy the application automatically upon code changes.
