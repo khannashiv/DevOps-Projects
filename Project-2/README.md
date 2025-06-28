@@ -144,6 +144,34 @@ To prevent `ErrImagePull` or `ImagePullBackOff` errors, ensure AKS can pull imag
    -->
 - Reference the secret in your Kubernetes deployment manifests under `imagePullSecrets`.
 
+### 6. Accessing Services Using `kubectl port-forward`
+
+Since the ArgoCD service is of type `LoadBalancer`, it is accessible directly via a public IP through the web browser. However, the other two services—`result` and `vote`—are exposed as `NodePort` services. In Azure Kubernetes Service (AKS), nodes typically reside within a Virtual Network (VNet) and are managed by a Virtual Machine Scale Set (VMSS), which means the nodes have only private IP addresses and no public/external IPs by default.
+
+As a result, even though the services are of type `NodePort`, they are not accessible externally from the internet. To access these microservices from your local machine, we can use the `kubectl port-forward` command. This command forwards a local port on your machine to a port on the Kubernetes service, allowing you to interact with the service as if it were running locally.
+
+**Usage:**
+
+```bash
+kubectl port-forward service/<service-name> <local-port>:<service-port>
+```
+
+**Example:**
+
+```bash
+kubectl port-forward service/vote 1234:8080
+kubectl port-forward service/result 5678:8081
+```
+
+After running the above command, you can access the `vote` service in your web browser at [http://localhost:1234/](http://localhost:1234/).
+
+After running the above command, you can access the `result` service in your web browser at [http://localhost:5678/](http://localhost:5678/).
+
+**Summary:**
+- Use `kubectl port-forward` to access internal AKS services from your local machine.
+- This is especially useful when services are not exposed via public IPs or external load balancers.
+- Replace `<service-name>`, `<local-port>`, and `<service-port>` with your actual service name and desired ports.
+
 ---
 
 ## Reference Documentation
