@@ -51,7 +51,7 @@ This project is designed to automate the deployment of a sample voting applicati
 - ![Azure-CICD-19.png](./Images/Azure-CICD-19.png)
 - ![Azure-CICD-20.png](./Images/Azure-CICD-20.png)
 - ![Azure-CICD-21.png](./Images/Azure-CICD-21.png)
-- ![Azure-CICD-22.png](./Images/Azure-CICD-22.png)
+- ![Azure-CICD-22.png](./Images/AZure-CICD-22.png)
 - ![Azure-CICD-23.png](./Images/Azure-CICD-23.png)
 - ![Azure-CICD-24.png](./Images/Azure-CICD-24.png)
 - ![Azure-CICD-25.png](./Images/Azure-CICD-25.png)
