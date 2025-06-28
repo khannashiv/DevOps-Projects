@@ -130,13 +130,18 @@ To prevent `ErrImagePull` or `ImagePullBackOff` errors, ensure AKS can pull imag
 
    ```bash
    kubectl create secret docker-registry regcred \
-      --docker-server=<acr-name>.azurecr.io \
+      --docker-server=<acr-name>.azurecr.io \ 
       --docker-username=<acr-username> \
       --docker-password='<acr-password>' \
       --docker-email=<your-email> \
       --namespace=default
    ```
-
+   <!-- 
+      -- In above command in my case : 
+            - docker-server=shivacr356.azurecr.io
+            - docker-username=ShivACR356
+            - docker-email=devopspractice668@gmail.com
+   -->
 - Reference the secret in your Kubernetes deployment manifests under `imagePullSecrets`.
 
 ---
