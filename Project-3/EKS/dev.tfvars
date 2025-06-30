@@ -37,15 +37,15 @@ addons = [
     version = "v1.18.1-eksbuild.1"
   },
   {
-    name    = "coredns"
+    name    = "coredns",
     version = "v1.11.1-eksbuild.4"
   },
   {
-    name    = "kube-proxy"
+    name    = "kube-proxy",
     version = "v1.29.0-eksbuild.1"
   },
   {
-    name    = "aws-ebs-csi-driver"
+    name    = "aws-ebs-csi-driver",
     version = "v1.27.1-eksbuild.1"
   }
   # Add more addons as needed
