@@ -3,7 +3,7 @@ locals {
   env = var.env
 }
 
-module "eks" {
+module "EKS" {
   source = "../Module"
 
   env                   = var.env
