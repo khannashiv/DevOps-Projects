@@ -24,7 +24,7 @@ pipeline {
         stage('Sonarqube Analysis') {
             steps {
                 dir('Application-Code/frontend') {
-                    withSonarQubeEnv('sonar-server') {
+                    withSonarQubeEnv('Sonar-Server') {
                         script{
                             echo "Running SonarQube Scanner..."
                             sh ''' 
