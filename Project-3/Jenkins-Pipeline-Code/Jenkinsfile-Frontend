@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Checkout from Git') {
             steps {
-                git credentialsId: 'Github_PAT', url: 'https://github.com/khannashiv/DevOps-Projects.git'
+                git credentialsId: 'Github_PAT', url: 'https://github.com/khannashiv/DevOps-Projects.git', branch: 'main'
             }
         }
         stage('Sonarqube Analysis') {
