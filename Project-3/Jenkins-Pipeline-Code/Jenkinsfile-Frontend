@@ -82,6 +82,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git credentialsId: 'GITHUB', url: 'https://github.com/khannashiv/DevOps-Projects.git'
+            }
         }
         stage('Update Deployment file') {
             environment {
