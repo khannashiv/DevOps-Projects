@@ -42,7 +42,7 @@ addons = [
   },
   {
     name    = "kube-proxy",
-    version = "v1.32.5-eksbuild.2"
+    version = "v1.30.13-eksbuild.2"
   },
   {
     name    = "aws-ebs-csi-driver",
