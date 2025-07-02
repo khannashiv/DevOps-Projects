@@ -19,7 +19,9 @@ pipeline {
         stage('Checkout from Git') {
             steps {
                 git credentialsId: 'Github_PAT', url: 'https://github.com/khannashiv/DevOps-Projects.git', branch: 'main'
+            }
         }
+
         stage('Sonarqube Analysis') {
             steps {
                 dir('Application-Code/backend') {
@@ -81,7 +83,9 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git credentialsId: 'Github_PAT', url: 'https://github.com/khannashiv/DevOps-Projects.git', branch: 'main'
+            }
         }
+        
         stage('Update Deployment file') {
             environment {
                 GIT_REPO_NAME = "DevOps-Projects"
