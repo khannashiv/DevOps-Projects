@@ -66,7 +66,9 @@ pipeline {
                             sh 'docker system prune -f'
                             sh 'docker container prune -f'
                             sh 'pwd && ls -al'
-                            sh 'docker build -t ${AWS_ECR_REPO_NAME} -f Dockerfile .'
+                            sh 'echo ${WORKSPACE}'
+                            sh 'docker build -t ${AWS_ECR_REPO_NAME} -f ${WORKSPACE}/Application-Code/frontend/Dockerfile ${WORKSPACE}/Application-Code/frontend'
+                            // sh 'docker build -t ${AWS_ECR_REPO_NAME} -f Dockerfile .'
                     }
                 }
             }
