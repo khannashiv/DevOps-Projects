@@ -65,7 +65,7 @@ pipeline {
                     dir('Application-Code/frontend') {
                             sh 'docker system prune -f'
                             sh 'docker container prune -f'
-                            sh 'docker build -t ${AWS_ECR_REPO_NAME} ../Application-code/frontend'
+                            sh 'docker build -t ${AWS_ECR_REPO_NAME} -f ../Application-code/frontend/Dockerfile ../Application-code/frontend'
                     }
                 }
             }
