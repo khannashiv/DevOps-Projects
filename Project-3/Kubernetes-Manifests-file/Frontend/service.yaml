@@ -7,7 +7,8 @@ spec:
   ports:
   - port: 3000
     protocol: TCP
+  type: NodePort
   # type: ClusterIP
-  type: LoadBalancer
+  # type: LoadBalancer
   selector:
     role: frontend
