@@ -62,7 +62,7 @@ pipeline {
         stage("Docker Image Build") {
             steps {
                 script {
-                    dir('Application-Code/frontend') {
+                    dir('Project-3/Application-Code/frontend') {
                             sh 'docker system prune -f'
                             sh 'docker container prune -f'
                             sh 'pwd'
