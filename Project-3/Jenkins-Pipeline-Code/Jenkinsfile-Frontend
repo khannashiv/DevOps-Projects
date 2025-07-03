@@ -68,6 +68,9 @@ pipeline {
                             sh 'pwd'
                             sh 'ls -al'
                             sh 'echo ${WORKSPACE}'
+                            sh 'ls -al ${WORKSPACE}'
+                            sh 'ls -al ${WORKSPACE}/Application-Code'
+                            sh 'ls -al ${WORKSPACE}/Application-Code/frontend'
                             // Check if Dockerfile exists explicitly before trying to build
                             sh 'test -f Dockerfile && echo Dockerfile exists || echo Dockerfile does not exist'
                             // Build the Docker image using the Dockerfile in the current directory
