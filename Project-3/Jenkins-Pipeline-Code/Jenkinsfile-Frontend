@@ -69,15 +69,11 @@ pipeline {
                             sh 'ls -al'
                             sh 'echo ${WORKSPACE}'
                             sh 'ls -al ${WORKSPACE}'
-                            sh 'ls -al ${WORKSPACE}/Application-Code'
-                            sh 'ls -al ${WORKSPACE}/Application-Code/frontend'
-                            // Check if Dockerfile exists explicitly before trying to build
-                            sh 'test -f Dockerfile && echo Dockerfile exists || echo Dockerfile does not exist'
+                            sh 'ls -al ${WORKSPACE}/Project-3/Application-Code/frontend/'
                             // Build the Docker image using the Dockerfile in the current directory
                             sh 'docker build -t ${AWS_ECR_REPO_NAME} -f ${WORKSPACE}/Project-3/Application-Code/frontend/Dockerfile ${WORKSPACE}/Application-Code/frontend/'
-                            // sh 'docker build -t ${AWS_ECR_REPO_NAME} -f Dockerfile .'
+                        }
                     }
-                }
             }
         }
         stage("ECR Image Pushing") {
