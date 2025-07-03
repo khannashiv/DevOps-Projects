@@ -74,7 +74,7 @@ pipeline {
                             // Check if Dockerfile exists explicitly before trying to build
                             sh 'test -f Dockerfile && echo Dockerfile exists || echo Dockerfile does not exist'
                             // Build the Docker image using the Dockerfile in the current directory
-                            sh 'docker build -t ${AWS_ECR_REPO_NAME} -f ${WORKSPACE}/Application-Code/frontend/Dockerfile ${WORKSPACE}/Application-Code/frontend'
+                            sh 'docker build -t ${AWS_ECR_REPO_NAME} -f ${WORKSPACE}/Project-3/Application-Code/frontend/Dockerfile ${WORKSPACE}/Application-Code/frontend'
                             // sh 'docker build -t ${AWS_ECR_REPO_NAME} -f Dockerfile .'
                     }
                 }
