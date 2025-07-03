@@ -96,7 +96,7 @@ pipeline {
                 git credentialsId: 'Github_PAT', url: 'https://github.com/khannashiv/DevOps-Projects.git', branch: 'main'
             }
         }
-        stage('Update k8s manifest file i.e. deployment.yaml file') {
+        stage('Update k8s manifest file i.e. deployment.yaml file for frontend') {
             environment {
                 GIT_REPO_NAME = "DevOps-Projects"
                 GIT_USER_NAME = "khannashiv"

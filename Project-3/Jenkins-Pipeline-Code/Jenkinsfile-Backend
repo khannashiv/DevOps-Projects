@@ -58,10 +58,10 @@ pipeline {
         stage("Docker Image Build") {
             steps {
                 script {
-                    dir('Application-Code/backend') {
+                    dir('Project-3/Application-Code/backend') {
                             sh 'docker system prune -f'
                             sh 'docker container prune -f'
-                            sh 'docker build -t ${AWS_ECR_REPO_NAME} ../Application-code/backend'
+                            sh 'docker build -t ${AWS_ECR_REPO_NAME} .'
                     }
                 }
             }
@@ -86,14 +86,14 @@ pipeline {
             }
         }
         
-        stage('Update Deployment file') {
+        stage('Update k8s manifest file i.e. deployment.yaml file for backend') {
             environment {
                 GIT_REPO_NAME = "DevOps-Projects"
                 GIT_USER_NAME = "khannashiv"
             }
             steps {
-                dir('Kubernetes-Manifests-file/Backend') {
-                    withCredentials([string(credentialsId: 'Github_PAT', variable: 'GITHUB_TOKEN')]) {
+                dir('Project-3/Kubernetes-Manifests-file/Backend') {
+                    withCredentials([usernamePassword(credentialsId: 'Github_PAT', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_TOKEN')]) {
                         sh '''
                             git config user.email "khannashiv94@gmail.com"
                             git config user.name "khannashiv"
@@ -104,7 +104,7 @@ pipeline {
                             sed -i "s/${AWS_ECR_REPO_NAME}:${imageTag}/${AWS_ECR_REPO_NAME}:${BUILD_NUMBER}/" deployment.yaml
                             git add deployment.yaml
                             git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
-                            git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                            git push https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                         '''
                     }
                 }
