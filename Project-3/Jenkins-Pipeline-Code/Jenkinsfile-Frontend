@@ -71,7 +71,8 @@ pipeline {
                             sh 'ls -al ${WORKSPACE}'
                             sh 'ls -al ${WORKSPACE}/Project-3/Application-Code/frontend/'
                             // Build the Docker image using the Dockerfile in the current directory
-                            sh 'docker build -t ${AWS_ECR_REPO_NAME} -f ${WORKSPACE}/Project-3/Application-Code/frontend/Dockerfile ${WORKSPACE}/Application-Code/frontend/'
+                            sh 'docker build -t ${AWS_ECR_REPO_NAME} .'
+                            //sh 'docker build -t ${AWS_ECR_REPO_NAME} -f ${WORKSPACE}/Project-3/Application-Code/frontend/Dockerfile ${WORKSPACE}/Application-Code/frontend/'
                         }
                     }
             }
