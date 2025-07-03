@@ -96,13 +96,13 @@ pipeline {
                 git credentialsId: 'Github_PAT', url: 'https://github.com/khannashiv/DevOps-Projects.git', branch: 'main'
             }
         }
-        stage('Update Deployment file') {
+        stage('Update k8s manifest file i.e. deployment.yaml file') {
             environment {
                 GIT_REPO_NAME = "DevOps-Projects"
                 GIT_USER_NAME = "khannashiv"
             }
             steps {
-                dir('Kubernetes-Manifests-file/Frontend') { 
+                dir('Project-3/Kubernetes-Manifests-file/Frontend') { 
                     withCredentials([usernamePassword(credentialsId: 'Github_PAT', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_TOKEN')]){
                         sh '''
                             git config user.email "khannashiv94@gmail.com"
