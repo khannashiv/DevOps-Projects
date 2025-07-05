@@ -1,6 +1,7 @@
 name: CI/CD Pipeline
 
 on:
+  workflow_dispatch: # This enables the manual trigger from the UI
   push:
     branches: [ main ]
     paths-ignore:
